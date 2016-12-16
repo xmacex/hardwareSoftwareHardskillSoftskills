@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+	width: 960px;
+}
+div#hypothesis {
+	background-image: url("img/hypothesis.jpg");
+	height: 390px;
+	background-size: cover;
+}
+img.hypothesis {
+	width: 100%;
+	object-fit: cover;
+}
+
+img.survey {
+	width: 30%;
+	opacity: 0.9;
+	box-shadow: 2px 4px 5px black;
+	object-fit: cover;
+	height: 250px;
+	margin: 10px;
+	cursor: grab;
+}
+
+img.brighten {
+	filter: brightness(200%);
+}
+
+img.survey:hover {
+	box-shadow: 4px 8px 10px black;
+}
+
+div#dragger {
+	margin-bottom: 5px;
+}
+
+div.dragitem {
+	color: cyan;
+	left: 435px;
+	box-shadow: 2px 4px 5px grey;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-right: 10px;
+	padding: 10px;
+	font-size: larger;
+	width: 5em;
+	float: left;
+	background-color: white;
+	cursor: grab;
+}
+
+div.dragitem:hover {
+	box-shadow: 2px 4px 10px grey;
+}
+
+hr,
+h2,
+div#skill,
+div#ware {
+	clear: both;
+}
+
+div#dragger hr#continuum {
+	color: cyan;
+}
+
+</style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body>
+	<h2>Hypothesis</h2>
+	<div id="hypothesis">
+<!--		<img class="hypothesis" src="hypothesis.jpg" /> -->
+	</div>
+	<div id="dragger">
+		<div id="ware">
+			<div class="dragitem">hardware</div>
+			<div class="dragitem">software</div>
+		</div>
+		<hr id="continuum" />
+		<div id="skill">
+			<div class="dragitem">hard skills</div>
+			<div class="dragitem">soft skills</div>
+		</div>
+	</div>
+	<h2>Survey on 15-12-2016 at ETHOS Lab, n=10</h2>
+	<div id="dragarea">
+		<img class="survey brighten" src="img/IMG_20161216_160158.jpg" />
+		<img class="survey brighten" src="img/IMG_20161216_161523.jpg" />
+		<img class="survey brighten" src="img/IMG_20161216_162229.jpg" />
+		<img class="survey brighten " src="img/IMG_20161216_162353.jpg" />
+		<img class="survey brighten" src="img/IMG_20161216_163443.jpg" />
+		<img class="survey brighten" src="img/IMG_20161216_164258.jpg" />
+		<img class="survey" src="img/IMG_20161216_165750.jpg" />
+		<img class="survey brighten" src="img/IMG_20161216_171548.jpg" />
+		<img class="survey brighten" src="img/IMG_20161216_172045.jpg" />
+		<img class="survey brighten" src="img/IMG_20161216_172312.jpg" />
+	</div>
+</body>
+<script>
+	$(function() {
+		$("img.survey").draggable({containment: "parent"});
+		$("div.dragitem").draggable({axis: "x"});
+		$("img.survey").click(function() {
+			$("img.survey").css("z-index", 0);
+			$(this).css("z-index", 100);
+		});
+		$("div#dragarea").mouseover(function() {
+			$("div#hypothesis").animate({"height": "240px", "background-position-y": "-150px"})
+		});
+		$("div#hypothesis").mouseover(function() {
+			$(this).animate({"height": "390px", "background-position-y": "0px"});
+		});
+		$(".dragitem").map(function() {
+			$(this).animate({
+				"left": Math.random() * (960 - 90)
+			}).delay(1000)
+		});
+		$("img.survey").map(function() {
+			$(this).animate({
+				"left": -10 + Math.random() * 20,
+				"top": -10 + Math.random() * 20
+			})
+		})
+	});
+</script>
+</html>
